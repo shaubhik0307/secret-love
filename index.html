@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Private File</title>
+
+<style>
+body {
+  margin: 0;
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.box {
+  background: rgba(0,0,0,0.7);
+  padding: 30px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+}
+
+input {
+  padding: 10px;
+  width: 80%;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background: pink;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+#countdown, #main, #slideshow {
+  display: none;
+}
+
+img {
+  width: 100%;
+  border-radius: 10px;
+  margin-top: 15px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MUSIC -->
+<audio id="music" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PASSWORD -->
+<div class="box" id="login">
+  <h2>🔒 Private File</h2>
+  <p>Enter Password</p>
+  <input type="password" id="pass" placeholder="Password">
+  <br>
+  <button onclick="check()">Open</button>
+  <p id="error"></p>
+</div>
+
+<!-- COUNTDOWN -->
+<div class="box" id="countdown">
+  <h2>❤️ Loading Love...</h2>
+  <h1 id="timer">5</h1>
+</div>
+
+<!-- MAIN MESSAGE -->
+<div class="box" id="main">
+  <h1>💖 I Love You Mum Mum 💖</h1>
+  <h2>To My Dear Girlfriend</h2>
+
+  <p>
+    You are my happiness,<br>
+    my smile,<br>
+    my everything 😘
+  </p>
+
+  <p>
+    Forever Yours ❤️  
+    <br>– Your Love
+  </p>
+
+  <button onclick="showPhotos()">See Our Memories 📸</button>
+</div>
+
+<!-- SLIDESHOW -->
+<div class="box" id="slideshow">
+  <h2>Our Moments 💕</h2>
+
+  <img id="photo" src="https://picsum.photos/300/300?1">
+
+  <br>
+  <button onclick="next()">Next ➡️</button>
+</div>
+
+<script>
+const PASSWORD = "mummum123"; // 🔑 Change this password
+
+let time = 5;
+let slide = 1;
+
+// Password Check
+function check() {
+  let p = document.getElementById("pass").value;
+
+  if (p === PASSWORD) {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("countdown").style.display = "block";
+    start();
+  } else {
+    document.getElementById("error").innerText = "Wrong Password ❌";
+  }
+}
+
+// Countdown
+function start() {
+  let t = setInterval(() => {
+    document.getElementById("timer").innerText = time;
+    time--;
+
+    if (time < 0) {
+      clearInterval(t);
+      document.getElementById("countdown").style.display = "none";
+      document.getElementById("main").style.display = "block";
+      document.getElementById("music").play();
+    }
+  }, 1000);
+}
+
+// Show Photos
+function showPhotos() {
+  document.getElementById("main").style.display = "none";
+  document.getElementById("slideshow").style.display = "block";
+}
+
+// Next Photo
+function next() {
+  slide++;
+  document.getElementById("photo").src =
+    "https://picsum.photos/300/300?" + slide;
+}
+</script>
+
+</body>
+</html>
