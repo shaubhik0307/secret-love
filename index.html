@@ -2,156 +2,177 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Private File</title>
+<title>For My Love ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins&display=swap" rel="stylesheet">
 
 <style>
-body {
-  margin: 0;
-  background: linear-gradient(to right, #ff758c, #ff7eb3);
-  font-family: Arial, sans-serif;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  text-align: center;
+body{
+  margin:0;
+  height:100vh;
+  background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fad0c4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Poppins',sans-serif;
+  overflow:hidden;
 }
 
-.box {
-  background: rgba(0,0,0,0.7);
-  padding: 30px;
-  border-radius: 15px;
-  width: 90%;
-  max-width: 400px;
+/* Floating Hearts */
+.heart{
+  position:absolute;
+  color:rgba(255,0,100,0.7);
+  font-size:20px;
+  animation:float 8s linear infinite;
 }
 
-input {
-  padding: 10px;
-  width: 80%;
-  border-radius: 5px;
-  border: none;
-  margin-top: 10px;
+@keyframes float{
+  from{transform:translateY(100vh);}
+  to{transform:translateY(-10vh);}
 }
 
-button {
-  padding: 10px 20px;
-  border: none;
-  background: pink;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 10px;
-  font-weight: bold;
+.box{
+  background:rgba(255,255,255,0.2);
+  backdrop-filter:blur(12px);
+  padding:35px;
+  border-radius:20px;
+  text-align:center;
+  max-width:420px;
+  box-shadow:0 0 25px rgba(255,0,100,0.4);
 }
 
-#countdown, #main, #slideshow {
-  display: none;
+/* Login */
+#login input{
+  padding:12px;
+  width:80%;
+  border:none;
+  border-radius:8px;
+  margin:10px 0;
 }
 
-img {
-  width: 100%;
-  border-radius: 10px;
-  margin-top: 15px;
+#login button{
+  padding:10px 25px;
+  border:none;
+  border-radius:20px;
+  background:#ff4b7d;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* Main */
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:42px;
+  color:#fff;
+  text-shadow:0 0 10px pink;
+}
+
+p{
+  color:#fff;
+  line-height:1.6;
+}
+
+button{
+  background:#ff4b7d;
+  border:none;
+  padding:10px 22px;
+  border-radius:20px;
+  color:white;
+  cursor:pointer;
+  margin-top:15px;
+}
+
+#main,#count{
+  display:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
+<!-- Music -->
 <audio id="music" loop>
-  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">
 </audio>
 
-<!-- PASSWORD -->
+<!-- Hearts -->
+<script>
+for(let i=0;i<30;i++){
+ let h=document.createElement("div");
+ h.className="heart";
+ h.innerHTML="❤️";
+ h.style.left=Math.random()*100+"vw";
+ h.style.animationDelay=Math.random()*8+"s";
+ h.style.fontSize=(15+Math.random()*25)+"px";
+ document.body.appendChild(h);
+}
+</script>
+
+<!-- Login -->
 <div class="box" id="login">
-  <h2>🔒 Private File</h2>
-  <p>Enter Password</p>
-  <input type="password" id="pass" placeholder="Password">
-  <br>
-  <button onclick="check()">Open</button>
-  <p id="error"></p>
+<h2 style="color:white">🔐 Secret Love</h2>
+<input type="password" id="pass" placeholder="Enter Password">
+<br>
+<button onclick="check()">Open 💖</button>
+<p id="err" style="color:yellow"></p>
 </div>
 
-<!-- COUNTDOWN -->
-<div class="box" id="countdown">
-  <h2>❤️ Loading Love...</h2>
-  <h1 id="timer">5</h1>
+<!-- Countdown -->
+<div class="box" id="count">
+<h2 style="color:white">Preparing Surprise 💕</h2>
+<h1 id="timer">5</h1>
 </div>
 
-<!-- MAIN MESSAGE -->
+<!-- Main -->
 <div class="box" id="main">
-  <h1>💖 I Love You Mum Mum 💖</h1>
-  <h2>To My Dear Girlfriend</h2>
 
-  <p>
-    You are my happiness,<br>
-    my smile,<br>
-    my everything 😘
-  </p>
+<h1>I Love You Mum Mum ❤️</h1>
 
-  <p>
-    Forever Yours ❤️  
-    <br>– Your Love
-  </p>
+<p>
+You are my happiness,<br>
+my peace,<br>
+my forever 💖<br><br>
 
-  <button onclick="showPhotos()">See Our Memories 📸</button>
-</div>
+No matter what happens,<br>
+I will always stand by you 😘
+</p>
 
-<!-- SLIDESHOW -->
-<div class="box" id="slideshow">
-  <h2>Our Moments 💕</h2>
+<p>— Your Love</p>
 
-  <img id="photo" src="https://picsum.photos/300/300?1">
+<button onclick="play()">Play Music 🎵</button>
 
-  <br>
-  <button onclick="next()">Next ➡️</button>
 </div>
 
 <script>
-const PASSWORD = "mummum123"; // 🔑 Change this password
+const PASSWORD="mummum123";
+let t=5;
 
-let time = 5;
-let slide = 1;
+function check(){
+ let p=document.getElementById("pass").value;
+ if(p===PASSWORD){
+  login.style.display="none";
+  count.style.display="block";
+  start();
+ }else{
+  err.innerText="Wrong Password ❌";
+ }
+}
 
-// Password Check
-function check() {
-  let p = document.getElementById("pass").value;
-
-  if (p === PASSWORD) {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("countdown").style.display = "block";
-    start();
-  } else {
-    document.getElementById("error").innerText = "Wrong Password ❌";
+function start(){
+ let x=setInterval(()=>{
+  timer.innerText=t;
+  t--;
+  if(t<0){
+   clearInterval(x);
+   count.style.display="none";
+   main.style.display="block";
   }
+ },1000);
 }
 
-// Countdown
-function start() {
-  let t = setInterval(() => {
-    document.getElementById("timer").innerText = time;
-    time--;
-
-    if (time < 0) {
-      clearInterval(t);
-      document.getElementById("countdown").style.display = "none";
-      document.getElementById("main").style.display = "block";
-      document.getElementById("music").play();
-    }
-  }, 1000);
-}
-
-// Show Photos
-function showPhotos() {
-  document.getElementById("main").style.display = "none";
-  document.getElementById("slideshow").style.display = "block";
-}
-
-// Next Photo
-function next() {
-  slide++;
-  document.getElementById("photo").src =
-    "https://picsum.photos/300/300?" + slide;
+function play(){
+ document.getElementById("music").play();
 }
 </script>
 
